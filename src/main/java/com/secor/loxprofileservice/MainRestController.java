@@ -56,11 +56,12 @@ public class MainRestController
                         username.set(response.getUsername());
                         //redisTemplate.opsForValue().set(credential.getCitizenid().toString(), credential.getPassword());
 
-                        if(username.equals(userdetail.getUsername()) && !(userdetail.getUsername() == null || userdetail.getUsername().isEmpty()))
+                        if(username.get().equals(userdetail.getUsername()))
                         {
                             if(userdetailRepository.findById(username.get()).isEmpty())
                             {
                                 userdetailRepository.save(userdetail);
+                                log.info("USER DETAILS SAVED FOR "+username.get());
                             }
                             else
                             {
@@ -73,10 +74,14 @@ public class MainRestController
                                         userdetail.getCountry(),
                                         username.get()
                                 );
+                                log.info("USER DETAILS UPDATED FOR "+username.get());
                             }
+
                         }
-
-
+                        else
+                        {
+                            log.info("USER CREDENTIAL AND DETAILS MISMATCH "+username.get());
+                        }
                     },
                     error ->
                     {
