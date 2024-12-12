@@ -60,10 +60,6 @@ public class MainRestController
             cookieList = List.of(cookies);
         }
 
-
-
-
-
         if(cookieList.isEmpty() || cookieList.stream().filter(cookie -> cookie.getName().contains("UPUSDE")).findAny().isEmpty())
         {
             // IT's  FRESH REQUEST
@@ -79,7 +75,7 @@ public class MainRestController
 
                 //STEP 0B: CREATE A TEMPORARY COOKIE -- UPUSDE
 
-                Cookie cookieUPUSDE = new Cookie("UPUSDE"+secToken, null);
+                Cookie cookieUPUSDE = new Cookie("UPUSDE"+secToken, null); // STEP 3A
                 cookieUPUSDE.setMaxAge(300);
                 // Send the token for validation to Auth-Service in an Async manner
 
